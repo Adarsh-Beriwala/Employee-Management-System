@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 style="margin-bottom:20px;">Dashboard</h2>
+
+<!-- 🔍 SEARCH BOX -->
+<div class="card section">
+    <h3>Search Employees</h3>
+
+    <form method="GET">
+        <input type="text" name="name" placeholder="Search by Name">
+        <input type="text" name="department" placeholder="Search by Department">
+        <input type="text" name="role" placeholder="Search by Role">
+
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<!-- ➕ ADD EMPLOYEE -->
+{% if request.user.is_staff %}
+<div class="card section">
+    <h3>Add Employee</h3>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <input type="text" name="name" placeholder="Name" required>
+        <input type="text" name="department" placeholder="Department" required>
+        <input type="text" name="role" placeholder="Role" required>
+        
+        <button type="submit">Add Employee</button>
+    </form>
+</div>
+{% endif %}
+
+<!-- 📋 EMPLOYEE TABLE -->
+<div class="card section">
+    <h3>Employee List</h3>
+
+    <table style="width:100%; border-collapse: collapse;">
+
+        <tr style="background:#1f2d3d; color:white;">
+            <th style="padding:12px;">Name</th>
+            <th style="padding:12px;">Department</th>
+            <th style="padding:12px;">Role</th>
+            {% if request.user.is_staff %}
+            <th style="padding:12px;">Action</th>
+            {% endif %}
+        </tr>
+
+        {% for emp in employees %}
+        <tr style="border-bottom:1px solid #ddd;">
+            <td style="padding:10px;">{{ emp.name }}</td>
+            <td style="padding:10px;">{{ emp.department }}</td>
+            <td style="padding:10px;">{{ emp.role }}</td>
+
+            {% if request.user.is_staff %}
+            <td style="padding:10px;">
+                <a style="color:red; text-decoration:none;" href="/delete/{{ emp.id }}/">Delete</a>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+
+{% endblock %}

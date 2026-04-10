@@ -169,6 +169,3 @@ manage.py
 If you found this project useful, consider giving it a ⭐ on GitHub.
 
 
-## ⭐ Support
-
-If you found this project useful, consider giving it a ⭐ on GitHub.

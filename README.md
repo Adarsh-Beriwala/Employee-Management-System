@@ -1,4 +1,4 @@
-# 🧑‍💼 Employee Management System
+# 🧑‍💼 Office Employee Management System
 
 A full-stack Employee Management System built using Django that enables efficient management of employee records with secure authentication, role-based access control, and dynamic multi-field filtering.
 
